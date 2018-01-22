@@ -1,0 +1,24 @@
+# Last updated: Sept 23, 2014
+# Author: Dahai Guo
+
+Before running the example, make sure that 
+1. rtree.jar and security.policy are in the same folder.
+2. You have some feed items in that folder as well
+
+To run the example:
+Step 0: enter the directory where rtree.jar and security.policy are stored.
+
+Step 1: start an rmi registry: 
+	* "start rmiregistry -J-Djava.rmi.server.useCodebaseOnly=false" in Windows
+	* "rmiregistry -J-Djava.rmi.server.useCodebaseOnly=false" in Linux
+	
+Step 2: start the rmi agent by running the following command
+	* java -cp path_to/rtree.jar -Djava.rmi.server.codebase=file:/path_to/rtree.jar -Djava.security.policy=security.policy com.geofeedia.networks.RMIAgent
+	* Note: you need to spell out the path to rtree.jar for "java.rmi.server.codebase" even if rtree.jar is in the working directory
+	
+Step 3: run the text datum loader by running the following command
+	* java -cp rtree.jar com.geofeedia.rtree.client.TextBasicDatumLoader feeditems_#########.txt unicode
+	
+Notes:
+1. it will take a while if there are many feeditems 
+2. While or after the program is running, a folder named "rmi_leaves" will be created. It stores all the leaves which exists in CSV format.
